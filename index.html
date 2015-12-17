@@ -1,0 +1,207 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>JQuery - Item Slider</title>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+<style>
+
+html, body {
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	font-size: 1.3em;
+	font-family: Lato,sans-serif;
+}
+
+header {
+	padding: 130px 0;
+	background: #1abc9c;
+	color: #fff;
+}
+
+.center-text {
+	text-align: center;
+}
+
+.inner {
+	width: 800px;
+	margin: auto;
+}
+
+#slider-wrapper {
+	width: 1200px;
+	overflow: hidden;
+	margin: auto;
+	position: relative;
+	top: 200px;
+}
+
+.slides {
+	float: left;
+	background: #ccc;
+	text-align: center;
+	line-height: 250px;
+	color: #fff;
+}
+
+#prev, #next {
+	width: 35px;
+	position: absolute;
+	top: 50%;
+	margin-top: -25px;
+	cursor: pointer;
+}
+
+#prev {
+	left: 5px;
+	text-align: left;
+}
+
+#next {
+	right: 5px;
+	text-align: right;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+	<div class="inner center-text">
+    	
+        <span>JQUERY Carousel</span>
+    	<span>BY ALEXANDER JAMES</span>
+    
+		<p class="">You will love this light (~ 7kb) free swiper. It comes with many options and it works with your simple
+		native browser scrolling Try it on touch devices!</p>
+
+	</div>
+
+</header>
+
+<div id="slider-wrapper">
+
+	<div id="slider-inner">
+
+		<div class="slides">1</div>
+    
+    	<div class="slides">2</div>
+    
+    	<div class="slides">3</div>
+    
+    	<div class="slides">4</div>
+    
+    	<div class="slides">5</div>
+        
+     </div> <!-- SLIDER INNER -->
+     
+     <img id="prev" src="images/left-arrow.png" />
+     
+     <img id="next" src="images/right-arrow.png" />
+
+</div> <!-- SLIDER WRAPPER -->
+
+<div id="demo"></div>
+
+<script>
+
+var itemWidth = 300;
+var itemHeight = 250;
+var itemMargin = 50;
+var slidesCount = $(".slides").size();
+var totalItemWidth = slidesCount * itemWidth;
+var totalItemMargin = (slidesCount * itemMargin) * 2;
+var sliderInnerWidth = totalItemWidth + totalItemMargin;
+
+var slideOne = (itemMargin * 2) + itemWidth;
+var lastSlide = slidesCount - 3;
+var speed = 400;
+
+count = 0;
+
+$(document).ready(function() {
+
+// SLIDES INNER DIMENSIONS
+	
+$("#slider-inner").css({
+	
+	width: sliderInnerWidth
+	
+});
+
+// SLIDES DIMENSIONS
+
+$(".slides").css({
+	
+	width: itemWidth,
+	height: itemHeight,
+	marginLeft: itemMargin,
+	marginRight: itemMargin,
+	
+});
+
+// NEXT FUNCTION
+
+$("#next").click(function() {
+	
+	currentCount = count;
+	count = currentCount + 1;
+	
+	$("#slider-inner").animate({
+		
+		marginLeft: '-='+slideOne
+		
+	}, speed);
+	
+	foo();
+    
+}); // END NEXT ANIMATION
+
+// PREV FUNCTION
+
+$("#prev").click(function() {
+	
+	currentCount = count;
+	count = currentCount - 1;
+	
+	$("#slider-inner").animate({
+		
+		marginLeft: '+='+slideOne
+		
+	}, speed);
+	
+	foo();
+    
+}); // END PREV ANIMATION
+
+	foo();
+
+function foo(){
+ 
+    if(count == 0){
+        $("#prev").hide();   
+    }
+    if(count == lastSlide - 1){
+		$("#prev").show();
+		$("#next").show();  
+    }
+	if(count == lastSlide){
+		$("#next").hide(); 
+    }
+ 
+}
+    
+}); // DOCUMENT READY
+
+
+</script>
+
+</body>
+</html>
